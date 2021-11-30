@@ -52,6 +52,7 @@ routes.post("/", upload.single("advertImage"), function (req, res) {
       type: req.body.type,
       image: imageUrl,
       category: req.body.category,
+      contact: req.body.contact,
       county: req.body.county,
       town: req.body.town,
     },

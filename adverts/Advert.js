@@ -6,6 +6,7 @@ var AdvertSchema = mongoose.Schema({
     image: String,
     description: String,
     category: String,
+    contact: String,
     county: String,
     town: String,
     uploaded: {type:Date, default: Date.now }

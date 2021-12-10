@@ -43,27 +43,58 @@ routes.get("/", function (req, res) {
 });
 
 routes.post("/", upload.single("advertImage"), function (req, res) {
+
+
+  
+
   var imageUrl = req.file.path.slice(8, req.file.path.length);
-  // var imageUrl = req.file.path;
-  Advert.create(
-    {
-      title: req.body.title,
-      description: req.body.description,
-      type: req.body.type,
-      image: imageUrl,
-      category: req.body.category,
-      contact: req.body.contact,
-      county: req.body.county,
-      town: req.body.town,
-    },
-    function (err, postedAdvert) {
-      if (err) {
-        res.status(500).json(err);
-      } else {
-        res.status(201).json(postedAdvert);
+
+  if(imageUrl == null){
+    Advert.create(
+      {
+        title: req.body.title,
+        description: req.body.description,
+        type: req.body.type,
+        image: 'http://localhost:8080/empty.png',
+        category: req.body.category,
+        contact: req.body.contact,
+        county: req.body.county,
+        town: req.body.town,
+      },
+      function (err, postedAdvert) {
+        if (err) {
+          res.status(500).json(err);
+        } else {
+          res.status(201).json(postedAdvert);
+        }
       }
-    }
-  );
+    );
+
+  }else{
+    Advert.create(
+      {
+        title: req.body.title,
+        description: req.body.description,
+        type: req.body.type,
+        image: imageUrl,
+        category: req.body.category,
+        contact: req.body.contact,
+        county: req.body.county,
+        town: req.body.town,
+      },
+      function (err, postedAdvert) {
+        if (err) {
+          res.status(500).json(err);
+        } else {
+          res.status(201).json(postedAdvert);
+        }
+      }
+    );
+
+  }
+
+  
+  
 });
 
 routes.get("/:id", function (req, res) {

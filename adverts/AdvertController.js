@@ -47,15 +47,15 @@ routes.post("/", upload.single("advertImage"), function (req, res) {
 
   
 
-  var imageUrl = req.file.path.slice(8, req.file.path.length);
+  
 
-  if(imageUrl == null){
+  if(req.file == undefined){
     Advert.create(
       {
         title: req.body.title,
         description: req.body.description,
         type: req.body.type,
-        image: 'http://localhost:8080/empty.png',
+        image: 'empty.png',
         category: req.body.category,
         contact: req.body.contact,
         county: req.body.county,
@@ -71,6 +71,8 @@ routes.post("/", upload.single("advertImage"), function (req, res) {
     );
 
   }else{
+    var imageUrl = req.file.path.slice(8, req.file.path.length);
+
     Advert.create(
       {
         title: req.body.title,
